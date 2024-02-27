@@ -7,7 +7,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/TechChallenge.API/TechChallenge.API.csproj", "src/TechChallenge.API/"]
+COPY ["src/TechChallenge.API", "src/TechChallenge.API/"]
 RUN dotnet restore "./src/TechChallenge.API/./TechChallenge.API.csproj"
 COPY . .
 WORKDIR "/src/src/TechChallenge.API"

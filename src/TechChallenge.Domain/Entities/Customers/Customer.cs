@@ -14,9 +14,15 @@ public class Customer(string name, Address address) : IEntity
     public CustomerId CustomerId { get; init; }
         = new CustomerId(Guid.NewGuid());
 
-    public string Name { get; init; }
+    public string Name { get; private set; }
         = name;
 
-    public Address Address { get; init; }
+    public Address Address { get; private set; }
         = address;
+
+    public void Anonymize()
+    {
+        Name = Guid.NewGuid().ToString();
+        Address.Anonymize();
+    }
 }

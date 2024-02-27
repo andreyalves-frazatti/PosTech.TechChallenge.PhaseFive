@@ -16,4 +16,7 @@ public class CustomerGateway
 
     public Task<Customer?> GetByIdAsync(CustomerId customerId, CancellationToken cancellationToken)
         => _customerRepository.FindOneAsync(customerId, cancellationToken);
+
+    public Task UpdateAsync(Customer customer, CancellationToken cancellationToken)
+        => _customerRepository.UpdateAsync(customer, cancellationToken);
 }

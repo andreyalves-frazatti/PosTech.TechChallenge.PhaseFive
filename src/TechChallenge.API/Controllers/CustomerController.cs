@@ -4,7 +4,7 @@ using TechChallenge.API.Models;
 
 namespace TechChallenge.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/customers")]
 [ApiController]
 public class CustomerController(IMediator mediator)
     : ControllerBase
@@ -15,7 +15,6 @@ public class CustomerController(IMediator mediator)
     public async Task<IActionResult> PostAsync([FromBody] CreateCustomerModel model, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(model.MapToCommand(), cancellationToken);
-
         return Ok(response);
     }
 
@@ -23,13 +22,13 @@ public class CustomerController(IMediator mediator)
     public async Task<IActionResult> GetAsync(GetCustomerModel model, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(model.MapToQuery(), cancellationToken);
-
         return Ok(response);
     }
 
-    [HttpPut]
+    [HttpPut("anonymize")]
     public async Task<IActionResult> AnonymizeAsync(AnonymizeCustomerModel model, CancellationToken cancellationToken)
     {
-        return Accepted();
+        var response = await _mediator.Send(model.MapToCommand(), cancellationToken);
+        return Ok(response);
     }
 }
